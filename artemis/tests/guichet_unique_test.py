@@ -171,53 +171,6 @@ class GuichetUnique(object):
                      datetime="20121119T123000",
                      data_freshness="base_schedule")
 
-    def test_kirin_cots_trip_observed_delay_passe_minuit(self):
-        """
-        Test delay of a train which arrival is the day after the departure
-
-        Requested departure: 2012/12/16 22:30:00
-        From: gare de Paris-Nord (Paris)
-        To: gare de St Quentin (Saint-Quentin)
-
-        Before the delay, the train travels from 2012/12/16 22:37:00 to 2012/12/17 00:16:00
-        After the delay, the train travels from 2012/12/16 22:37:00 to 2012/12/17 00:41:00
-        """
-        self.send_and_wait('trip_observed_delay_passe_minuit_847919_ter.json')
-
-        self.journey(_from="stop_area:OCE:SA:87271007",
-                     to="stop_area:OCE:SA:87296004",
-                     datetime="20121216T223000",
-                     data_freshness="realtime")
-
-        self.journey(_from="stop_area:OCE:SA:87271007",
-                     to="stop_area:OCE:SA:87296004",
-                     datetime="20121216T223000",
-                     data_freshness="base_schedule")
-
-    def test_kirin_cots_trip_departure_delayed_pass_midnight(self):
-        """
-        Test delay of a train with a departure without delay before midnight,
-        then a departure after midnight with the delay
-
-        Requested departure: 2012/12/16 23:40:00
-        From: gare de Noyon (Noyon)
-        To: gare de St Quentin (Saint-Quentin)
-
-        Before the delay, the train travels from 2012/12/16 23:44:00 to 2012/12/17 00:16:00
-        After the delay, the train travels from 2012/12/17 00:09:00 to 2012/12/17 00:41:00
-        """
-        self.send_and_wait('trip_observed_delay_passe_minuit_847919_ter.json')
-
-        self.journey(_from="stop_area:OCE:SA:87276782",
-                     to="stop_area:OCE:SA:87296004",
-                     datetime="20121216T234000",
-                     data_freshness="realtime")
-
-        self.journey(_from="stop_area:OCE:SA:87276782",
-                     to="stop_area:OCE:SA:87296004",
-                     datetime="20121216T234000",
-                     data_freshness="base_schedule")
-
     def test_kirin_cots_reload_from_scratch(self):
         """
         Test removal of a train
