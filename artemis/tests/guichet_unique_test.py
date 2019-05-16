@@ -550,31 +550,6 @@ class GuichetUnique(object):
                      max_nb_transfers="0",
                      data_freshness="base_schedule")
 
-    def test_kirin_cots_trip_add_stop_point_at_the_end_make_pass_midnight(self):
-        """
-        Test add a stop_time at the end of the vj that arrives the day after the departure
-
-        Requested departure: 2012/11/20 13:58:00
-        From: gare de Frankfurt-am-Main-Hbf
-        To: gare de Nimes (Nimes)
-
-        Before the addition, no solution can be found without transfer
-        After the addition, an other train travels from 14:01:00 on 2012/11/20 to 00:30:00 on 2012/11/21
-        """
-        self.send_and_wait('trip_add_new_stop_point_at_the_end_make_pass_midnight_9580_tgv.json')
-
-        self.journey(_from="stop_area:OCE:SA:80110684",
-                     to="stop_area:OCE:SA:87775007",
-                     datetime="20121120T135800",
-                     max_nb_transfers="0",
-                     data_freshness="realtime")
-
-        self.journey(_from="stop_area:OCE:SA:80110684",
-                     to="stop_area:OCE:SA:87775007",
-                     datetime="20121120T135800",
-                     max_nb_transfers="0",
-                     data_freshness="base_schedule")
-
     def test_kirin_cots_trip_add_stop_make_pass_midnight_local_and_utc(self):
         """
         Test add a stop time that arrives the same day of the theoretical vj and leaves the day after
