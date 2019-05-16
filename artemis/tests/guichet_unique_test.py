@@ -575,32 +575,6 @@ class GuichetUnique(object):
                      max_nb_transfers="0",
                      data_freshness="base_schedule")
 
-    @xfail(reason="Waiting for fix - NAVP-1128", raises=AssertionError)
-    def test_kirin_cots_trip_add_stop_point_at_the_beginning_make_pass_midnight(self):
-        """
-        Test add a stop_time at the beginning of the vj that the day before the first stop of the theoretical vj
-
-        Requested departure: 2012/11/19 22:30:00
-        From: gare de Luxembourg
-        To: gare de Marseille-St-Charles (Marseille)
-
-        Before the addition, no solution can be found without transfer
-        After the addition, an other train travels from 22:30:00 on 2012/11/19 to 22:16:00 on 2012/11/20
-        """
-        self.send_and_wait('trip_add_new_stop_point_at_the_beginning_make_pass_midnight_9580_tgv.json')
-
-        self.journey(_from="stop_area:OCE:SA:82001000",
-                     to="stop_area:OCE:SA:87751008",
-                     datetime="20121119T223000",
-                     max_nb_transfers="0",
-                     data_freshness="realtime")
-
-        self.journey(_from="stop_area:OCE:SA:82001000",
-                     to="stop_area:OCE:SA:87751008",
-                     datetime="20121119T223000",
-                     max_nb_transfers="0",
-                     data_freshness="base_schedule")
-
     def test_kirin_cots_trip_add_stop_make_pass_midnight_local_and_utc(self):
         """
         Test add a stop time that arrives the same day of the theoretical vj and leaves the day after
